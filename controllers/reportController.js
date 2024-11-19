@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 
 exports.makeReport = async (req, res) => {
   try {
-    const { name, email, phoneNumber, description, category, latitude, longtitude } = req.body;
+    const { name, email, phone, description, category, latitude, longitude } = req.body;
 
     if (!req.file) {
       return res.status(400).json('No file uploaded');
@@ -11,15 +11,17 @@ exports.makeReport = async (req, res) => {
     const { buffer: fileBuffer, originalname: fileName, mimetype } = req.file;
 
     //EMAIL MESSAGE
-    const message = `Category: ${category},\n
-    Description${description}\n
-    lat:${latitude}\n
-    long:${longtitude}\n
+    const message = `
+    Category: ${category},\n
+    Description: ${description}\n
+    Coordinates:
+    Latitude:${latitude}\n
+    Longitude:${longitude}\n
 
     Sender details:\n
     Name: ${name},\n
     Email: ${email},\n
-    Phone Number:${phoneNumber}
+    Phone Number:${phone}
     `;
 console.log(fileBuffer, fileName)
     // Configure Nodemailer
