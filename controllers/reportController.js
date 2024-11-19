@@ -21,7 +21,7 @@ exports.makeReport = async (req, res) => {
     Email: ${email},\n
     Phone Number:${phoneNumber}
     `;
-
+console.log(fileBuffer, fileName)
     // Configure Nodemailer
     const transporter = nodemailer.createTransport({
       service: 'gmail',
